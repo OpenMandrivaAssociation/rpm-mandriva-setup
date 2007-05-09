@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.40
+%define version 1.41
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -17,6 +17,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{name}-%{version}.tar.bz2
+Source1: ChangeLog
 License: GPL
 Group: System/Configuration/Packaging
 Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
@@ -42,6 +43,7 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 
 %prep
 %setup -q
+cp %{_sourcedir}/ChangeLog .
 
 %build
 %configure2_5x
