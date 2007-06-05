@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.41
+%define version 1.42
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -77,6 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc ChangeLog
 %dir %_prefix/lib/rpm/mandriva
+%config(noreplace) %_sysconfdir/rpm/platform
 %_prefix/lib/rpm/mandriva/rpmrc
 %_prefix/lib/rpm/mandriva/macros
 %_prefix/lib/rpm/mandriva/rpmpopt
