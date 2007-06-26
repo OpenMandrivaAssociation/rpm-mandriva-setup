@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.44
+%define version 1.45
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -76,6 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc ChangeLog
+%_bindir/rpmgenplatform
 %dir %_prefix/lib/rpm/mandriva
 %config(noreplace) %_sysconfdir/rpm/platform
 %_prefix/lib/rpm/mandriva/rpmrc
@@ -97,5 +98,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/emacs/site-lisp/rpm-spec-mode.el
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/%{name}.el
 %endif
-
-
