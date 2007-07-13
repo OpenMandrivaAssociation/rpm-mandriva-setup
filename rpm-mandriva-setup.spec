@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.46
+%define version 1.47
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -37,6 +37,7 @@ Requires: %name = %version-%release
 %if %have_emacsmodespec
 Conflicts: rpm < 4.4.1
 %endif
+Conflicts: spec-helper <= 0.26.1
 
 %description build
 The Mandriva rpm configuration and scripts dedicated to build rpms.
