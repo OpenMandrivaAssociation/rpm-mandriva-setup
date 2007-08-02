@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.47
+%define version 1.48
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -16,7 +16,7 @@ Summary: The Mandriva rpm configuration and scripts
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: %{name}-%{version}.tar.bz2
+Source0: %{name}-%{version}.tar.gz
 Source1: ChangeLog
 License: GPL
 Group: System/Configuration/Packaging
