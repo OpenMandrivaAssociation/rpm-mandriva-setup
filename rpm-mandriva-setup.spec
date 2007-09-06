@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.55
+%define version 1.56
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
