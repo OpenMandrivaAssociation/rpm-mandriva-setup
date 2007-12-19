@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.64
+%define version 1.65
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -8,6 +8,9 @@
 %if %mdkversion < 200600
 %define have_emacsmodespec 0
 %endif
+
+# we want /etc/rpm/platform and rpmgenplatform only on jbj's rpm
+%define rpmplatform %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)
 
 %{?_with_emacsspecmode: %define have_emacsmodespec 1}
 %{?_without_emacsspecmode: %define have_emacsmodespec 0}
@@ -46,7 +49,11 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 cp %{_sourcedir}/ChangeLog .
 
 %build
-%configure2_5x
+%configure2_5x \
+%if %rpmplatform
+    --with-rpmplatform
+%endif
+
 %make
 
 %install
@@ -76,11 +83,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc ChangeLog
-%_bindir/rpmgenplatform
 %dir %_prefix/lib/rpm/mandriva
+%if %rpmplatform
+%_bindir/rpmgenplatform
 %config(noreplace) %_sysconfdir/rpm/platform
 %ifarch x86_64
 %config(noreplace) %_sysconfdir/rpm/platform32
+%endif
 %endif
 %_prefix/lib/rpm/mandriva/rpmrc
 %_prefix/lib/rpm/mandriva/macros
