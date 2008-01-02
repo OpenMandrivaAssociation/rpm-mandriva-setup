@@ -24,6 +24,7 @@ Source1: ChangeLog
 License: GPL
 Group: System/Configuration/Packaging
 Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
+BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: rpm-devel
 
 %description
