@@ -1,6 +1,6 @@
 %define name rpm-mandriva-setup
 %define version 1.68
-%define release %mkrel 1
+%define release %mkrel 2
 
 # This can be useful for backport, as rpm-4.2
 # provides the emacs-spec mode
@@ -26,6 +26,10 @@ Group: System/Configuration/Packaging
 Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: rpm-devel
+%if !%rpmplatform
+Conflicts: rpm = 4.4.8
+Conflicts: rpm = 4.4.6
+%endif
 
 %description
 The Mandriva rpm configuration and scripts.
