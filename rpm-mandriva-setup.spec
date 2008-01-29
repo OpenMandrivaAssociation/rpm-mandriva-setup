@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.71
+%define version 1.72
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -10,7 +10,9 @@
 %endif
 
 # we want /etc/rpm/platform and rpmgenplatform only on jbj's rpm
-%define rpmplatform %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)
+%define rpmplatform %(if rpm --help | grep -q yaml; then echo 1; else echo 1; fi)
+# jbj's doesn't use rpmrc anymore, so not using --with-only-rpmrc on it
+%define only_rpmrc  %(if rpm --help | grep -q yaml; then echo 0; else echo 1; fi)
 
 %{?_with_emacsspecmode: %define have_emacsmodespec 1}
 %{?_without_emacsspecmode: %define have_emacsmodespec 0}
@@ -56,8 +58,12 @@ cp %{_sourcedir}/ChangeLog .
 %build
 %configure2_5x \
 %if %rpmplatform
-    --with-rpmplatform
+    --with-rpmplatform \
 %endif
+%if %only_rpmrc
+    --with-only-rpmrc \
+%endif
+
 
 %make
 
@@ -100,7 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %_prefix/lib/rpm/mandriva/rpmrc
 %_prefix/lib/rpm/mandriva/macros
 %_prefix/lib/rpm/mandriva/rpmpopt
+%if !%only_rpmrc
 %_prefix/lib/rpm/mandriva/*-%_target_os
+%endif
 
 %dir %{_sysconfdir}/rpm/macros.d
 
@@ -109,7 +117,10 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %_prefix/lib/rpm/mandriva/rpmrc
 %exclude %_prefix/lib/rpm/mandriva/macros
 %exclude %_prefix/lib/rpm/mandriva/rpmpopt
+%if !%only_rpmrc
 %exclude %_prefix/lib/rpm/mandriva/*-%_target_os
+%endif
+%{_sysconfdir}/rpm/macros.d/build.macros
 %_prefix/lib/rpm/mandriva/*
 
 %if %have_emacsmodespec
