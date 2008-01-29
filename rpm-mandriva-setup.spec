@@ -10,7 +10,7 @@
 %endif
 
 # we want /etc/rpm/platform and rpmgenplatform only on jbj's rpm
-%define rpmplatform %(if rpm --help | grep -q yaml; then echo 1; else echo 1; fi)
+%define rpmplatform %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)
 # jbj's doesn't use rpmrc anymore, so not using --with-only-rpmrc on it
 %define only_rpmrc  %(if rpm --help | grep -q yaml; then echo 0; else echo 1; fi)
 
