@@ -1,6 +1,6 @@
 %define name rpm-mandriva-setup
 %define version 1.72
-%define release %mkrel 1
+%define release %mkrel 2
 
 # This can be useful for backport, as rpm-4.2
 # provides the emacs-spec mode
@@ -73,6 +73,11 @@ rm -rf $RPM_BUILD_ROOT
 
 mkdir -p %buildroot%{_sysconfdir}/rpm/macros.d
 
+%if %only_rpmrc
+mv %buildroot%_prefix/lib/rpm/mandriva/macros %buildroot%{_sysconfdir}/rpm/macros.d/common.macros
+%endif
+
+
 %if %have_emacsmodespec
 # spec mode for emacs
 install -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp/
@@ -104,20 +109,23 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %_prefix/lib/rpm/rpmb_deprecated
 %_prefix/lib/rpm/mandriva/rpmrc
-%_prefix/lib/rpm/mandriva/macros
 %_prefix/lib/rpm/mandriva/rpmpopt
 %if !%only_rpmrc
+%_prefix/lib/rpm/mandriva/macros
 %_prefix/lib/rpm/mandriva/*-%_target_os
 %endif
 
 %dir %{_sysconfdir}/rpm/macros.d
+%if %only_rpmrc
+%{_sysconfdir}/rpm/macros.d/common.macros
+%endif
 
 %files build
 %defattr(-,root,root)
 %exclude %_prefix/lib/rpm/mandriva/rpmrc
-%exclude %_prefix/lib/rpm/mandriva/macros
 %exclude %_prefix/lib/rpm/mandriva/rpmpopt
 %if !%only_rpmrc
+%exclude %_prefix/lib/rpm/mandriva/macros
 %exclude %_prefix/lib/rpm/mandriva/*-%_target_os
 %endif
 %{_sysconfdir}/rpm/macros.d/build.macros
