@@ -1,6 +1,6 @@
 %define name rpm-mandriva-setup
-%define version 1.72
-%define release %mkrel 2
+%define version 1.73
+%define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
 # provides the emacs-spec mode
@@ -31,6 +31,8 @@ BuildRequires: rpm-devel
 %if !%rpmplatform
 Conflicts: rpm = 4.4.8
 Conflicts: rpm = 4.4.6
+# older rpm do not load /usr/lib/rpm/manbo/rpmrc:
+Conflicts: rpm <= 1:4.4.2.3-0.rc1.1mdv2008.1
 %endif
 
 %description
@@ -107,9 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_sysconfdir/rpm/platform32
 %endif
 %endif
-%_prefix/lib/rpm/rpmb_deprecated
-%_prefix/lib/rpm/mandriva/rpmrc
-%_prefix/lib/rpm/mandriva/rpmpopt
 %if !%only_rpmrc
 %_prefix/lib/rpm/mandriva/macros
 %_prefix/lib/rpm/mandriva/*-%_target_os
@@ -122,8 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files build
 %defattr(-,root,root)
-%exclude %_prefix/lib/rpm/mandriva/rpmrc
-%exclude %_prefix/lib/rpm/mandriva/rpmpopt
 %if !%only_rpmrc
 %exclude %_prefix/lib/rpm/mandriva/macros
 %exclude %_prefix/lib/rpm/mandriva/*-%_target_os
