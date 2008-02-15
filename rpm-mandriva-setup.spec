@@ -80,8 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p %buildroot%{_sysconfdir}/rpm/macros.d
 
 %if %only_rpmrc
-mv %buildroot%_prefix/lib/rpm/mandriva/macros %buildroot%{_sysconfdir}/rpm/macros.d/common.macros
+mv %buildroot%_prefix/lib/rpm/mandriva/macros %buildroot%{_sysconfdir}/rpm/macros.d/20common.macros
 %endif
+mv %buildroot%{_sysconfdir}/rpm/macros.d/{build.macros,20build.macros}
 
 
 %if %have_emacsmodespec
@@ -120,7 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_sysconfdir}/rpm/macros.d
 %if %only_rpmrc
-%{_sysconfdir}/rpm/macros.d/common.macros
+%{_sysconfdir}/rpm/macros.d/20common.macros
 %endif
 
 %files build
@@ -129,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %_prefix/lib/rpm/mandriva/macros
 %exclude %_prefix/lib/rpm/mandriva/*-%_target_os
 %endif
-%{_sysconfdir}/rpm/macros.d/build.macros
+%{_sysconfdir}/rpm/macros.d/20build.macros
 %_prefix/lib/rpm/mandriva/*
 
 %if %have_emacsmodespec
