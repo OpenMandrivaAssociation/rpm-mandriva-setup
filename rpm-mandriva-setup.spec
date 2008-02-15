@@ -1,5 +1,5 @@
 %define name rpm-mandriva-setup
-%define version 1.73
+%define version 1.74
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -26,7 +26,10 @@ Source1: ChangeLog
 License: GPL
 Group: System/Configuration/Packaging
 Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
+Requires: rpm-manbo-setup >= 0.4
 BuildRoot: %{_tmppath}/%{name}-buildroot
+# for "make test":
+BuildRequires: rpm-manbo-setup >= 0.4
 BuildRequires: rpm-devel
 %if !%rpmplatform
 Conflicts: rpm = 4.4.8
@@ -41,6 +44,7 @@ The Mandriva rpm configuration and scripts.
 %package build
 Group: System/Configuration/Packaging
 Summary: The Mandriva rpm configuration and scripts to build rpms
+Requires: rpm-manbo-setup-build >= 0.4
 Requires: spec-helper >= 0.6-5mdk
 Requires: multiarch-utils >= 1.0.3
 Requires: pkgconfig
