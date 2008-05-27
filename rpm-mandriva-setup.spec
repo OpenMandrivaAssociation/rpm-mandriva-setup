@@ -49,6 +49,8 @@ Requires: spec-helper >= 0.6-5mdk
 Requires: multiarch-utils >= 1.0.3
 Requires: pkgconfig
 Requires: %name = %version-%release
+# for %mdkversion
+Requires: mandriva-release
 %if %have_emacsmodespec
 Conflicts: rpm < 4.4.1
 %endif
