@@ -118,8 +118,8 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %endif
 %if !%only_rpmrc
-%_prefix/lib/rpm/mandriva/macros
-%_prefix/lib/rpm/mandriva/*-%_target_os
+%dir %_prefix/lib/rpm/mandriva/platform/
+%_prefix/lib/rpm/mandriva/platform/*-%_target_os
 %endif
 
 %dir %{_sysconfdir}/rpm/macros.d
@@ -131,7 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %if !%only_rpmrc
 %exclude %_prefix/lib/rpm/mandriva/macros
-%exclude %_prefix/lib/rpm/mandriva/*-%_target_os
+%exclude %_prefix/lib/rpm/mandriva/platform/*-%_target_os
 %endif
 %{_sysconfdir}/rpm/macros.d/20build.macros
 %_prefix/lib/rpm/mandriva/*
