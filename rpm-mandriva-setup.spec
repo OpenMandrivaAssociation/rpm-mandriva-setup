@@ -82,9 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 mkdir -p %buildroot%{_sysconfdir}/rpm/macros.d
 
-%if %only_rpmrc
 mv %buildroot%_prefix/lib/rpm/mandriva/macros %buildroot%{_sysconfdir}/rpm/macros.d/20common.macros
-%endif
 mv %buildroot%{_sysconfdir}/rpm/macros.d/{build.macros,20build.macros}
 
 
@@ -123,14 +121,11 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %dir %{_sysconfdir}/rpm/macros.d
-%if %only_rpmrc
 %{_sysconfdir}/rpm/macros.d/20common.macros
-%endif
 
 %files build
 %defattr(-,root,root)
 %if !%only_rpmrc
-%exclude %_prefix/lib/rpm/mandriva/macros
 %exclude %_prefix/lib/rpm/mandriva/platform/*-%_target_os
 %endif
 %{_sysconfdir}/rpm/macros.d/20build.macros
