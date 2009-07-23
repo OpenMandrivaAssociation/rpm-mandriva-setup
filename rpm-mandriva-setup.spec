@@ -9,11 +9,12 @@
 %define have_emacsmodespec 0
 %endif
 
-# we want /etc/rpm/platform and rpmgenplatform only on jbj's rpm < 5.2
+# we want /etc/rpm/platform and rpmgenplatform only on rpm5.org < 5.2
 %define rpmplatform %{?evr_tuple_select: 0}%{!?evr_tuple_select: %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)}
 
-# jbj's doesn't use rpmrc anymore, so not using --with-only-rpmrc on it
-%define only_rpmrc  %(if rpm --help | grep -q yaml; then echo 0; else echo 1; fi)
+# always include platform specific macros for rpm5.org compatibility, rpm.org
+# is also planning on burying rpmrc in the future anyways...
+%define only_rpmrc 0
 
 %{?_with_emacsspecmode: %define have_emacsmodespec 1}
 %{?_without_emacsspecmode: %define have_emacsmodespec 0}
