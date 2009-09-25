@@ -9,7 +9,7 @@
 %define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
 
 %define name rpm-mandriva-setup
-%define version 1.94
+%define version 1.95
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
