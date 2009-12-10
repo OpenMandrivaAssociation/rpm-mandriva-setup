@@ -9,7 +9,7 @@
 %define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
 
 %define name rpm-mandriva-setup
-%define version 1.95
+%define version 1.96
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -34,7 +34,6 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{name}-%{version}.tar.gz
-Source1: ChangeLog
 License: GPL
 Group: System/Configuration/Packaging
 Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
@@ -73,7 +72,6 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 
 %prep
 %setup -q
-cp %{_sourcedir}/ChangeLog .
 
 %build
 %configure2_5x \
@@ -117,7 +115,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog
 %dir %_prefix/lib/rpm/mandriva
 %if %rpmplatform
 %_bindir/rpmgenplatform
@@ -136,6 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files build
 %defattr(-,root,root)
+%doc NEWS ChangeLog
 %if !%only_rpmrc
 %exclude %_prefix/lib/rpm/mandriva/platform/*-%_target_os
 %endif
