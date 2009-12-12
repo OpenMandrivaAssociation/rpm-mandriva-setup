@@ -9,7 +9,7 @@
 %define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
 
 %define name rpm-mandriva-setup
-%define version 1.96
+%define version 1.97
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -107,6 +107,8 @@ cat <<EOF >$RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d/%{name}.el
 EOF
 %endif
 
+# workaround to fix build with rpm-mandriva-setup 1.96
+touch debugfiles.list
 %check
 make test
 
