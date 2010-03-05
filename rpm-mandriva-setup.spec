@@ -8,10 +8,6 @@
 
 %define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
 
-%define name rpm-mandriva-setup
-%define version 1.98
-%define release %mkrel 1
-
 # This can be useful for backport, as rpm-4.2
 # provides the emacs-spec mode
 %define have_emacsmodespec 1
@@ -29,45 +25,45 @@
 %{?_with_emacsspecmode: %define have_emacsmodespec 1}
 %{?_without_emacsspecmode: %define have_emacsmodespec 0}
 
-Summary: The Mandriva rpm configuration and scripts
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: %{name}-%{version}.tar.xz
-License: GPL
-Group: System/Configuration/Packaging
-Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
-Requires: rpm-manbo-setup >= 0.4
-BuildRoot: %{_tmppath}/%{name}-buildroot
+Summary:	The Mandriva rpm configuration and scripts
+Name:		rpm-mandriva-setup
+Version:	1.98
+Release:	%mkrel 1
+Source0:	%{name}-%{version}.tar.xz
+License:	GPLv2+
+Group:		System/Configuration/Packaging
+Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
+Requires:	rpm-manbo-setup >= 0.4
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 # for "make test":
-BuildRequires: rpm-manbo-setup >= 0.4
-BuildRequires: rpm-devel
+BuildRequires:	rpm-manbo-setup >= 0.4
+BuildRequires:	rpm-devel
 %if !%rpmplatform
-Conflicts: rpm = 4.4.8
-Conflicts: rpm = 4.4.6
+Conflicts:	rpm = 4.4.8
+Conflicts:	rpm = 4.4.6
 # older rpm do not load /usr/lib/rpm/manbo/rpmrc:
-Conflicts: rpm <= 1:4.4.2.3-0.rc1.1mdv2008.1
+Conflicts:	rpm <= 1:4.4.2.3-0.rc1.1mdv2008.1
 %endif
 
 %description
 The Mandriva rpm configuration and scripts.
 
-%package build
-Group: System/Configuration/Packaging
-Summary: The Mandriva rpm configuration and scripts to build rpms
-Requires: rpm-manbo-setup-build >= 0.4
-Requires: spec-helper >= 0.6-5mdk
-Requires: multiarch-utils >= 1.0.3
-Requires: pkgconfig
-Requires: %name = %version-%release
+%package	build
+Group:		System/Configuration/Packaging
+Summary:	The Mandriva rpm configuration and scripts to build rpms
+Requires:	rpm-manbo-setup-build >= 0.4
+Requires:	spec-helper >= 0.6-5mdk
+Requires:	multiarch-utils >= 1.0.3
+Requires:	pkgconfig
+Requires:	%name = %version-%release
 # for %mdkversion
-Requires: mandriva-release
+Requires:	mandriva-release
 %if %have_emacsmodespec
-Conflicts: rpm < 4.4.1
+Conflicts:	rpm < 4.4.1
 %endif
-Conflicts: spec-helper <= 0.26.1
+Conflicts:	spec-helper <= 0.26.1
 
-%description build
+%description	build
 The Mandriva rpm configuration and scripts dedicated to build rpms.
 
 %prep
