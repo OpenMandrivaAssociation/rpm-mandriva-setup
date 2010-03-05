@@ -9,7 +9,7 @@
 %define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
 
 %define name rpm-mandriva-setup
-%define version 1.97
+%define version 1.98
 %define release %mkrel 1
 
 # This can be useful for backport, as rpm-4.2
@@ -33,7 +33,7 @@ Summary: The Mandriva rpm configuration and scripts
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: %{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.tar.xz
 License: GPL
 Group: System/Configuration/Packaging
 Url: http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
