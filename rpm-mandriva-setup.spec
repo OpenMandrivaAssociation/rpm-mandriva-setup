@@ -27,9 +27,9 @@
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
-Version:	1.103
+Version:	1.104
 Release:	%mkrel 1
-Source0:	%{name}-%{version}.tar.xz
+Source0:	%{name}-%{version}.tar.gz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
 Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
