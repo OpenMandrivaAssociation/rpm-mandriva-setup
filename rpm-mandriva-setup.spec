@@ -132,9 +132,6 @@ rm -rf $RPM_BUILD_ROOT
 %files build
 %defattr(-,root,root)
 %doc NEWS ChangeLog
-%if !%only_rpmrc
-%exclude %_prefix/lib/rpm/mandriva/platform/*-%_target_os
-%endif
 %{_sysconfdir}/rpm/macros.d/20build.macros
 %_prefix/lib/rpm/mandriva/*
 
