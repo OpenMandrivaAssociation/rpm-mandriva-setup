@@ -27,7 +27,7 @@
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
-Version:	1.107
+Version:	1.108
 Release:	%mkrel 1
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
