@@ -55,6 +55,7 @@ Requires:	rpm-manbo-setup-build >= 0.4
 Requires:	spec-helper >= 0.6-5mdk
 Requires:	multiarch-utils >= 1.0.3
 Requires:	pkgconfig
+Requires:	python-pkg-resources
 Requires:	%name = %version-%release
 # for %mdkversion
 Requires:	mandriva-release
