@@ -114,17 +114,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%dir %_prefix/lib/rpm/mandriva
+%dir %{_prefix}/lib/rpm/mandriva
 %if %rpmplatform
-%_bindir/rpmgenplatform
-%config(noreplace) %_sysconfdir/rpm/platform
+%{_bindir}/rpmgenplatform
+%config(noreplace) %{_sysconfdir}/rpm/platform
 %ifarch x86_64
-%config(noreplace) %_sysconfdir/rpm/platform32
+%config(noreplace) %{_sysconfdir}/rpm/platform32
 %endif
 %endif
 %if !%only_rpmrc
-%dir %_prefix/lib/rpm/mandriva/platform/
-%_prefix/lib/rpm/mandriva/platform/*-%_target_os
+%dir %{_prefix}/lib/rpm/mandriva/platform/
+%{_prefix}/lib/rpm/mandriva/platform/*-%{_target_os}
 %endif
 
 %dir %{_sysconfdir}/rpm/macros.d
@@ -134,8 +134,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc NEWS ChangeLog
 %{_sysconfdir}/rpm/macros.d/20build.macros
-%_prefix/lib/rpm/mandriva/*
-
+%{_prefix}/lib/rpm/mandriva/*
+%exclude %{_prefix}/lib/rpm/mandriva/platform/
 %if %have_emacsmodespec
 %{_datadir}/emacs/site-lisp/rpm-spec-mode.el
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/%{name}.el
