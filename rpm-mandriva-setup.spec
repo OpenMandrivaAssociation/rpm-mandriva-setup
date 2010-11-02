@@ -24,8 +24,10 @@
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
 Version:	1.112
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source0:	%{name}-%{version}.tar.xz
+# patch to disable python() requires, as we are in the python 2.7 transition for the moment
+Patch0:     rpm-mandriva-setup-1.112-disable_python_egg_requires.diff
 License:	GPLv2+
 Group:		System/Configuration/Packaging
 Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
@@ -65,6 +67,8 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 
 %prep
 %setup -q
+# disable python-egg requires until we fully migrated to python 2.7
+%patch0 -p0 
 
 %build
 %configure2_5x \
