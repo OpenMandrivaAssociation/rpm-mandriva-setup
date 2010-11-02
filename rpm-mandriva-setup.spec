@@ -18,10 +18,6 @@
 # we want /etc/rpm/platform and rpmgenplatform only on rpm5.org < 5.2
 %define rpmplatform %{?evr_tuple_select: 0}%{!?evr_tuple_select: %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)}
 
-# always include platform specific macros for rpm5.org compatibility, rpm.org
-# is also planning on burying rpmrc in the future anyways...
-%define only_rpmrc 0
-
 %{?_with_emacsspecmode: %define have_emacsmodespec 1}
 %{?_without_emacsspecmode: %define have_emacsmodespec 0}
 
@@ -75,10 +71,6 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 %if %rpmplatform
     --with-rpmplatform \
 %endif
-%if %only_rpmrc
-    --with-only-rpmrc \
-%endif
-
 
 %make
 
@@ -122,11 +114,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/rpm/platform32
 %endif
 %endif
-%if !%only_rpmrc
-%dir %{_prefix}/lib/rpm/mandriva/platform/
-%{_prefix}/lib/rpm/mandriva/platform/*-%{_target_os}
-%endif
-
 %dir %{_sysconfdir}/rpm/macros.d
 %{_sysconfdir}/rpm/macros.d/20common.macros
 
@@ -135,7 +122,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS ChangeLog
 %{_sysconfdir}/rpm/macros.d/20build.macros
 %{_prefix}/lib/rpm/mandriva/*
-%exclude %{_prefix}/lib/rpm/mandriva/platform/
 %if %have_emacsmodespec
 %{_datadir}/emacs/site-lisp/rpm-spec-mode.el
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/%{name}.el
