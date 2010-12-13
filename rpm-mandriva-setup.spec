@@ -23,7 +23,7 @@
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
-Version:	1.113
+Version:	1.114
 Release:	%mkrel 1
 Source0:	%{name}-%{version}.tar.xz
 # patch to disable python() requires, as we are in the python 2.7 transition for the moment
