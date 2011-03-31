@@ -2,10 +2,6 @@
 %define distsuffix mdv
 %endif
 
-%if %{?mkrel:0}%{?!mkrel:1}
-%define mkrel(c:) %{-c: 0.%{-c*}.}%{1}%{?distsuffix:%distsuffix}%{?!distsuffix:mdv}%{?mandriva_release:%mandriva_release}%{?subrel:.%subrel}
-%endif
-
 %define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
 
 # This can be useful for backport, as rpm-4.2
