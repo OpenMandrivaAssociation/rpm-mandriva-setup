@@ -20,7 +20,7 @@
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
 Version:	1.122
-Release:	2
+Release:	3
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
@@ -49,6 +49,11 @@ Requires:	multiarch-utils >= 1.0.3
 Requires:	pkgconfig
 Requires:	python-pkg-resources
 Requires:	perl(JSON)
+Requires:	perl(YAML)
+Requires:	perl(File::Basename)
+Requires:	perl(File::Find)
+Requires:	perl(Getopt::Long)
+Requires:	perl(Pod::Usage)
 Requires:	%name = %version-%release
 # for %mdkversion
 Requires:	mandriva-release
