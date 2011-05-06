@@ -19,7 +19,7 @@
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
-Version:	1.124
+Version:	1.125
 Release:	2
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
