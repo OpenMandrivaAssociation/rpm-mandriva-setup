@@ -19,7 +19,7 @@
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
-Version:	1.130
+Version:	1.131
 Release:	1
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
