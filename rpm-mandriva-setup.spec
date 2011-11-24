@@ -19,7 +19,7 @@
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
-Version:	1.132
+Version:	1.133
 Release:	1
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
@@ -79,11 +79,6 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-mkdir -p %buildroot%{_sysconfdir}/rpm/macros.d
-
-mv %buildroot%_prefix/lib/rpm/mandriva/macros %buildroot%{_sysconfdir}/rpm/macros.d/20common.macros
-mv %buildroot%{_sysconfdir}/rpm/macros.d/{build.macros,20build.macros}
-
 
 %if %have_emacsmodespec
 # spec mode for emacs
@@ -115,13 +110,10 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/rpm/platform32
 %endif
 %endif
-%dir %{_sysconfdir}/rpm/macros.d
-%{_sysconfdir}/rpm/macros.d/20common.macros
 
 %files build
 %defattr(-,root,root)
 %doc NEWS ChangeLog
-%{_sysconfdir}/rpm/macros.d/20build.macros
 %{_prefix}/lib/rpm/mandriva/*
 %if %have_emacsmodespec
 %{_datadir}/emacs/site-lisp/rpm-spec-mode.el
