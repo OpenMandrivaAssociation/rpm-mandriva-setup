@@ -20,7 +20,7 @@
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
 Version:	1.133
-Release:	1
+Release:	2
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
@@ -34,7 +34,7 @@ BuildRequires:	rpm-devel
 Conflicts:	rpm = 4.4.8
 Conflicts:	rpm = 4.4.6
 # older rpm do not load /usr/lib/rpm/manbo/rpmrc:
-Conflicts:	rpm <= 1:4.4.2.3-0.rc1.1mdv2008.1
+Conflicts:	rpm < 1:5.4.4-14
 %endif
 
 %description
