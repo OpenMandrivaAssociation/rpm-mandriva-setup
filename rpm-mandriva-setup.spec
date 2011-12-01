@@ -76,17 +76,17 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
 
 %if %have_emacsmodespec
 # spec mode for emacs
-install -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp/
-install -m644 rpm-spec-mode.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp/
+install -d %{buildroot}%{_datadir}/emacs/site-lisp/
+install -m644 rpm-spec-mode.el %{buildroot}%{_datadir}/emacs/site-lisp/
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d
-cat <<EOF >$RPM_BUILD_ROOT%{_sysconfdir}/emacs/site-start.d/%{name}.el
+install -d %{buildroot}%{_sysconfdir}/emacs/site-start.d
+cat <<EOF >%{buildroot}%{_sysconfdir}/emacs/site-start.d/%{name}.el
 (setq auto-mode-alist (cons '("\\\\.spec$" . rpm-spec-mode) auto-mode-alist))
 (autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode (mandrakized)." t)
 EOF
@@ -98,7 +98,7 @@ touch debugfiles.list
 make test
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
