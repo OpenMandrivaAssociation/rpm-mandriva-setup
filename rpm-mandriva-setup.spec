@@ -33,6 +33,7 @@ BuildRequires:	rpm-devel
 %if !%rpmplatform
 # older rpm do not load /usr/lib/rpm/manbo/rpmrc:
 Conflicts:	rpm < 1:5.4.4-14
+BuildArch:	noarch
 %endif
 
 %description
@@ -66,7 +67,7 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 %setup -q
 
 %build
-%configure2_5x \
+%configure2_5x --build=%{_build} \
 %if %rpmplatform
     --with-rpmplatform \
 %endif
