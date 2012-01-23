@@ -31,8 +31,6 @@ BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	rpm-manbo-setup >= 0.4
 BuildRequires:	rpm-devel
 %if !%rpmplatform
-Conflicts:	rpm = 4.4.8
-Conflicts:	rpm = 4.4.6
 # older rpm do not load /usr/lib/rpm/manbo/rpmrc:
 Conflicts:	rpm < 1:5.4.4-14
 %endif
