@@ -20,15 +20,13 @@
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
 Version:	1.136
-Release:	1
+Release:	1.1
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
 Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
-Requires:	rpm-manbo-setup >= 0.4
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 # for "make test":
-BuildRequires:	rpm-manbo-setup >= 0.4
 BuildRequires:	rpm-devel
 %if !%rpmplatform
 # older rpm do not load /usr/lib/rpm/manbo/rpmrc:
@@ -42,7 +40,6 @@ The Mandriva rpm configuration and scripts.
 %package	build
 Group:		System/Configuration/Packaging
 Summary:	The Mandriva rpm configuration and scripts to build rpms
-Requires:	rpm-manbo-setup-build >= 0.4
 Requires:	spec-helper >= 0.6-5mdk
 Requires:	pkgconfig
 Requires:	python-pkg-resources
