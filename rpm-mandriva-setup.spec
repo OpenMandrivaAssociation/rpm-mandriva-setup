@@ -2,15 +2,8 @@
 %define distsuffix mdv
 %endif
 
-# This can be useful for backport, as rpm-4.2
-# provides the emacs-spec mode
-%define have_emacsmodespec 1
-
 # we want /etc/rpm/platform and rpmgenplatform only on rpm5.org < 5.2
 %define rpmplatform %{?evr_tuple_select: 0}%{!?evr_tuple_select: %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)}
-
-%{?_with_emacsspecmode: %define have_emacsmodespec 1}
-%{?_without_emacsspecmode: %define have_emacsmodespec 0}
 
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
@@ -22,7 +15,7 @@ Group:		System/Configuration/Packaging
 Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
 # for "make test":
 BuildRequires:	rpm-devel
-%if !%rpmplatform
+%if !%{rpmplatform}
 # older rpm do not load /usr/lib/rpm/manbo/rpmrc:
 Conflicts:	rpm < 1:5.4.4-14
 BuildArch:	noarch
@@ -43,9 +36,6 @@ Requires:	perl(File::Basename)
 Requires:	perl(File::Find)
 Requires:	perl(Getopt::Long)
 Requires:	perl(Pod::Usage)
-%if %have_emacsmodespec
-Conflicts:	rpm < 4.4.1
-%endif
 Conflicts:	spec-helper <= 0.26.1
 
 %description	build
@@ -55,9 +45,9 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 %setup -q
 
 %build
-%configure2_5x --build=%{_build} \
-%if %rpmplatform
-    --with-rpmplatform \
+%configure2_5x	--build=%{_build} \
+%if %{rpmplatform}
+		--with-rpmplatform \
 %endif
 
 %make
@@ -65,7 +55,6 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 %install
 %makeinstall_std
 
-%if %have_emacsmodespec
 # spec mode for emacs
 install -d %{buildroot}%{_datadir}/emacs/site-lisp/
 install -m644 rpm-spec-mode.el %{buildroot}%{_datadir}/emacs/site-lisp/
@@ -75,7 +64,6 @@ cat <<EOF >%{buildroot}%{_sysconfdir}/emacs/site-start.d/%{name}.el
 (setq auto-mode-alist (cons '("\\\\.spec$" . rpm-spec-mode) auto-mode-alist))
 (autoload 'rpm-spec-mode "rpm-spec-mode" "RPM spec mode (mandrakized)." t)
 EOF
-%endif
 
 # workaround to fix build with rpm-mandriva-setup 1.96
 touch debugfiles.list
@@ -95,7 +83,5 @@ make test
 %doc NEWS ChangeLog
 %dir %{_prefix}/lib/rpm/mandriva
 %{_prefix}/lib/rpm/mandriva/*
-%if %have_emacsmodespec
 %{_datadir}/emacs/site-lisp/rpm-spec-mode.el
 %config(noreplace) %{_sysconfdir}/emacs/site-start.d/%{name}.el
-%endif
