@@ -2,14 +2,9 @@
 %define distsuffix mdv
 %endif
 
-%define mdkversion            %(perl -pe '/(\\d+)\\.(\\d)\\.?(\\d)?/; $_="$1$2".($3||0)' /etc/mandriva-release)
-
 # This can be useful for backport, as rpm-4.2
 # provides the emacs-spec mode
 %define have_emacsmodespec 1
-%if %mdkversion < 200600
-%define have_emacsmodespec 0
-%endif
 
 # we want /etc/rpm/platform and rpmgenplatform only on rpm5.org < 5.2
 %define rpmplatform %{?evr_tuple_select: 0}%{!?evr_tuple_select: %(if rpm --help | grep -q yaml; then echo 1; else echo 0; fi)}
@@ -25,7 +20,6 @@ Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
 Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 # for "make test":
 BuildRequires:	rpm-devel
 %if !%rpmplatform
@@ -50,8 +44,6 @@ Requires:	perl(File::Find)
 Requires:	perl(Getopt::Long)
 Requires:	perl(Pod::Usage)
 Requires:	%name = %version-%release
-# for %mdkversion
-Requires:	mandriva-release
 %if %have_emacsmodespec
 Conflicts:	rpm < 4.4.1
 %endif
@@ -72,9 +64,7 @@ The Mandriva rpm configuration and scripts dedicated to build rpms.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-
 
 %if %have_emacsmodespec
 # spec mode for emacs
@@ -93,11 +83,7 @@ touch debugfiles.list
 %check
 make test
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %dir %{_prefix}/lib/rpm/mandriva
 %if %rpmplatform
 %{_bindir}/rpmgenplatform
@@ -108,7 +94,6 @@ rm -rf %{buildroot}
 %endif
 
 %files build
-%defattr(-,root,root)
 %doc NEWS ChangeLog
 %{_prefix}/lib/rpm/mandriva/*
 %if %have_emacsmodespec
