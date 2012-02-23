@@ -43,7 +43,6 @@ Requires:	perl(File::Basename)
 Requires:	perl(File::Find)
 Requires:	perl(Getopt::Long)
 Requires:	perl(Pod::Usage)
-Requires:	%name = %version-%release
 %if %have_emacsmodespec
 Conflicts:	rpm < 4.4.1
 %endif
@@ -84,7 +83,6 @@ touch debugfiles.list
 make test
 
 %files
-%dir %{_prefix}/lib/rpm/mandriva
 %if %rpmplatform
 %{_bindir}/rpmgenplatform
 %config(noreplace) %{_sysconfdir}/rpm/platform
@@ -95,6 +93,7 @@ make test
 
 %files build
 %doc NEWS ChangeLog
+%dir %{_prefix}/lib/rpm/mandriva
 %{_prefix}/lib/rpm/mandriva/*
 %if %have_emacsmodespec
 %{_datadir}/emacs/site-lisp/rpm-spec-mode.el
