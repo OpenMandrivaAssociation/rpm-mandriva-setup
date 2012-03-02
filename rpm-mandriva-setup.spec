@@ -67,8 +67,6 @@ EOF
 
 # workaround to fix build with rpm-mandriva-setup 1.96
 touch debugfiles.list
-%check
-make test
 
 %files
 %if %rpmplatform
