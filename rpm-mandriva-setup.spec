@@ -4,7 +4,7 @@
 Summary:	The Mandriva rpm configuration and scripts
 Name:		rpm-mandriva-setup
 Version:	1.140
-Release:	4
+Release:	5
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
@@ -22,7 +22,7 @@ BuildArch:	noarch
 %description
 The Mandriva rpm configuration and scripts.
 
-%package	build
+%package build
 Group:		System/Configuration/Packaging
 Summary:	The Mandriva rpm configuration and scripts to build rpms
 Requires:	spec-helper >= 0.6-5mdk
@@ -36,7 +36,7 @@ Requires:	perl(Getopt::Long)
 Requires:	perl(Pod::Usage)
 Conflicts:	spec-helper <= 0.26.1
 
-%description	build
+%description build
 The Mandriva rpm configuration and scripts dedicated to build rpms.
 
 %prep
