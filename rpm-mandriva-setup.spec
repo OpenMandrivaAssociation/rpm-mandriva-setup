@@ -8,7 +8,7 @@ Release:	ZED'S DEAD BABY
 Source0:	%{name}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Packaging
-Url:		http://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
+Url:		https://svn.mandriva.com/cgi-bin/viewvc.cgi/soft/rpm/rpm-setup/
 # for "make test":
 BuildRequires:	rpm-devel
 #BuildRequires:	rpm-manbo-setup-build
